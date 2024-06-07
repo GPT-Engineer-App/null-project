@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Box, Text, Input, Button, VStack, HStack } from "@chakra-ui/react";
+import { Box, Text, Input, Button, VStack, HStack, Alert, AlertIcon } from "@chakra-ui/react";
 import { useAddMessage } from "../integrations/supabase/index.js";
 
 const AdminView = () => {
