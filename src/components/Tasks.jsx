@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Box, Button, Input, VStack, HStack, Text, IconButton } from "@chakra-ui/react";
+import { Box, Button, Input, VStack, HStack, Text, IconButton, useBreakpointValue, useColorModeValue } from "@chakra-ui/react";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { useTasks, useAddTask, useUpdateTask, useDeleteTask } from "../integrations/supabase/index.js";
 
@@ -28,42 +28,64 @@ const Tasks = () => {
     deleteTask.mutate(id);
   };
 
+  const inputBg = useColorModeValue("white", "gray.700");
+  const buttonBg = useColorModeValue("teal.500", "teal.200");
+  const buttonColor = useColorModeValue("white", "black");
+
   if (isLoading) return <Text>Loading...</Text>;
 
   return (
-    <Box>
-      <VStack spacing={4}>
+    <Box w="full" p={4}>
+      <VStack spacing={4} align="stretch">
         <HStack>
           <Input
             placeholder="New Task"
             value={newTask}
             onChange={(e) => setNewTask(e.target.value)}
+            bg={inputBg}
           />
-          <Button onClick={handleAddTask}>Add Task</Button>
+          <Button
+            onClick={handleAddTask}
+            bg={buttonBg}
+            color={buttonColor}
+            _hover={{ bg: useColorModeValue("teal.600", "teal.300") }}
+          >
+            Add Task
+          </Button>
         </HStack>
         {tasks.map((task) => (
-          <HStack key={task.id} spacing={4}>
+          <HStack key={task.id} spacing={4} w="full">
             {editingTask === task.id ? (
               <>
                 <Input
                   value={editingTaskName}
                   onChange={(e) => setEditingTaskName(e.target.value)}
+                  bg={inputBg}
                 />
-                <Button onClick={() => handleUpdateTask(task)}>Save</Button>
+                <Button
+                  onClick={() => handleUpdateTask(task)}
+                  bg={buttonBg}
+                  color={buttonColor}
+                  _hover={{ bg: useColorModeValue("teal.600", "teal.300") }}
+                >
+                  Save
+                </Button>
               </>
             ) : (
               <>
-                <Text>{task.task_name}</Text>
+                <Text flex="1">{task.task_name}</Text>
                 <IconButton
                   icon={<FaEdit />}
                   onClick={() => {
                     setEditingTask(task.id);
                     setEditingTaskName(task.task_name);
                   }}
+                  aria-label="Edit Task"
                 />
                 <IconButton
                   icon={<FaTrash />}
                   onClick={() => handleDeleteTask(task.id)}
+                  aria-label="Delete Task"
                 />
               </>
             )}
