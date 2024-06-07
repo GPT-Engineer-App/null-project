@@ -1,4 +1,3 @@
-# Importing necessary components from Chakra UI
 import { Box, Text, VStack, Spinner, Alert, AlertIcon } from "@chakra-ui/react";
 import { useMessages } from "../integrations/supabase/index.js";
 
