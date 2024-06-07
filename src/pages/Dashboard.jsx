@@ -1,5 +1,5 @@
 import { Box, Flex, Text, Button, useColorMode, useColorModeValue, VStack, HStack, IconButton } from "@chakra-ui/react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Routes, Route } from "react-router-dom";
 import { useSupabaseAuth } from "../integrations/supabase/auth.jsx";
 import { FaSun, FaMoon, FaTasks, FaFileAlt } from "react-icons/fa";
 import Tasks from "../components/Tasks.jsx";
