@@ -1,5 +1,4 @@
 import { Box, Flex, Text, Button, useColorMode, useColorModeValue, VStack, HStack, IconButton } from "@chakra-ui/react";
-import { useEffect } from "react";
 import { useNavigate, Routes, Route } from "react-router-dom";
 import { useSupabaseAuth } from "../integrations/supabase/auth.jsx";
 import { FaSun, FaMoon, FaTasks, FaFileAlt } from "react-icons/fa";
@@ -7,17 +6,11 @@ import Tasks from "../components/Tasks.jsx";
 import Files from "../components/Files.jsx";
 
 const Dashboard = () => {
-  const { logout, session } = useSupabaseAuth();
+  const { logout } = useSupabaseAuth();
   const { colorMode, toggleColorMode } = useColorMode();
   const navigate = useNavigate();
   const bg = useColorModeValue("gray.100", "gray.900");
   const color = useColorModeValue("black", "white");
-
-  useEffect(() => {
-    if (session?.user?.id === "770a23b0-734c-4bb8-bce5-28574bf0c229") {
-      navigate("/admin");
-    }
-  }, [session, navigate]);
 
   return (
     <Box bg={bg} color={color} minH="100vh">
