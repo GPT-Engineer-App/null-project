@@ -1,4 +1,5 @@
-import { Container, Text, VStack, Input, Button, FormControl, FormLabel, Box, useToast } from "@chakra-ui/react";
+import { Container, Text, VStack, Input, Button, FormControl, FormLabel, Box, useToast, useColorMode, IconButton, HStack } from "@chakra-ui/react";
+import { FaSun, FaMoon } from "react-icons/fa";
 import { useState } from "react";
 import { supabase } from "../integrations/supabase/index.js";
 import { useNavigate } from "react-router-dom";
@@ -10,6 +11,8 @@ const Index = () => {
 
   const toast = useToast();
   const navigate = useNavigate();
+
+  const { colorMode, toggleColorMode } = useColorMode();
 
   const handleLogin = async () => {
     setLoading(true);
@@ -36,6 +39,13 @@ const Index = () => {
 
   return (
     <Container centerContent maxW="container.md" height="100vh" display="flex" flexDirection="column" justifyContent="center" alignItems="center">
+      <HStack spacing={4} position="absolute" top={4} right={4}>
+        <IconButton
+          icon={colorMode === "light" ? <FaMoon /> : <FaSun />}
+          onClick={toggleColorMode}
+          aria-label="Toggle dark mode"
+        />
+      </HStack>
       <VStack spacing={4}>
         <Text fontSize="2xl">Welcome to the Empty Project</Text>
         <Text>This is a blank canvas. Start building your project here.</Text>
